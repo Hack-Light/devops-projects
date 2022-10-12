@@ -9,7 +9,7 @@
 - run `chmod 400` on The key pair downloaded
 - Connect to your ec2 instance over the ssh network.
 
-![connect to aws ec2 instance](./images/project1/1.png)
+![connect to aws ec2 instance](../images/project1/1.png)
 
 ## THE ACTUAL WORK
 
@@ -19,16 +19,20 @@
 
 - `sudo apt update` - Always run this command when starting a new server
 
-![sudo apt update](./images/project1/2.png)
+![sudo apt update](../images/project1/2.png)
+
 - `sudo apt install apache2` - Install apache on your server
 
-![project1](./images/project1/3.png)
+![project1](../images/project1/3.png)
+
 - `sudo systemctl status apache2` - to check if your apache server is running without any errors.
 
-![project1](./images/project1/4.png)
+![project1](../images/project1/4.png)
+
 - Try visiting your site using `http://<ip address>:80`
 
-![project1](./images/project1/5.png)
+![project1](../images/project1/5.png)
+
 - Site cannot be reached - this is because I have not opened port 80 in my security group (firewall)
 
 ### STEPS TO OPEN A NEW PORT IN THE SECURITY GROUPS
@@ -37,28 +41,29 @@
 - Select launch-wizard-1 - which was created when creating the server or the security group attached to the server.
 - Select the inbound rules tab and click on edit
 
-![project1](./images/project1/6.png)
+![project1](../images/project1/6.png)
 
 - Click on add rule
 
 - Change custom tcp to http and port to 80
-bv e my first apache server running
-```
+  bv e my first apache server running
 
-![project1](./images/project1/9.png)
+````
+
+![project1](../images/project1/9.png)
 
 ### INSTALLING MYSQL
 
 - sudo apt install mysql-server
-  ![project1](./images/project1/10.png)
+  ![project1](../images/project1/10.png)
 
 - Sudo mysql
-  ![project1](./images/project1/11.png)
+  ![project1](../images/project1/11.png)
 
 - run `ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'PassWord.1';` - This set the password for the root user.
 
 - run `sudo mysql_secure_installation`
-  ![project1](./images/project1/12.png)
+  ![project1](../images/project1/12.png)
 
 ### INSTALLING PHP
 
@@ -70,11 +75,11 @@ bv e my first apache server running
 
   - libapache2-mod-php - will enable apache to handle php files
 
-![project1](./images/project1/13.png)
+![project1](../images/project1/13.png)
 
 - run `php -v` to checkthe version
 
-![project1](./images/project1/14.png)
+![project1](../images/project1/14.png)
 
 ### CREATING VIRTUAL HOSTS FOR WEBSITES
 
@@ -84,7 +89,7 @@ bv e my first apache server running
 sudo mkdir /var/www/projectlamp
 sudo chown -R $USER:$USER /var/www/projectlamp #assign the ownership of the directory to the current user of the system.
 sudo vi /etc/apache2/sites-available/projectlamp.conf
-```
+````
 
 - paste this in side the file editor
 
@@ -110,7 +115,7 @@ sudo apache2ctl configtest #check syntax error in config files
 sudo systemctl reload apache2 #to reload the apache server
 ```
 
-![project1](./images/project1/15.png)
+![project1](../images/project1/15.png)
 
 - But the `/var/www/projectlamp` is empty so we create an html file to display
 
@@ -135,7 +140,7 @@ sudo echo 'Hello LAMP from hostname' $(curl -s http://169.254.169.254/latest/met
 
 - run `sudo systemctl reload apache2` - this restarts the apache server
 
-![project1](./images/project1/16.png)
+![project1](../images/project1/16.png)
 
 - ` vim /var/www/projectlamp/index.php` - this creates and opens a php file in vim editor
 
