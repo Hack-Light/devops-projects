@@ -48,7 +48,7 @@
 - Change custom tcp to http and port to 80
   bv e my first apache server running
 
-````
+
 
 ![project1](../images/project1/9.png)
 
