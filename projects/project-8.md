@@ -1,9 +1,22 @@
 # PROJECT 8 - LOAD BALANCER SOLUTION WITH APACHE
 
+![project8](../images/project8/1.png)
+
+![project8](../images/project8/3.png)
+
+![project8](../images/project8/4.png)
+
+![project8](../images/project8/5.png)
+
+![project8](../images/project8/6.png)
 
 ## CONFIGURE APACHE AS A LOAD BALANCER
 
 - Create an Ubuntu Server 20.04 EC2 instance and name it `Project-8-apache-lb`, so your EC2 list will look like this:
+
+![project8](../images/project8/7.png)
+
+![project8](../images/project8/8.png)
 
 - Open TCP port 80 on `Project-8-apache-lb` by creating an Inbound Rule in Security Group.
 - Install Apache Load Balancer on `Project-8-apache-lb` server and configure it to point traffic coming to LB to both Web Servers:
@@ -45,15 +58,21 @@ ProxyPass / balancer://mycluster/
 ProxyPassReverse / balancer://mycluster/
 ```
 
+![project8](../images/project8/9.png)
+
 - Restart apache server `sudo systemctl restart apache2`
 
-> Bytraffic balancing method will distribute incoming load between your Web Servers according to current traffic load. We can control in which proportion the traffic must be distributed by loadfactor parameter. 
+![project8](../images/project8/10.png)
+
+> Bytraffic balancing method will distribute incoming load between your Web Servers according to current traffic load. We can control in which proportion the traffic must be distributed by loadfactor parameter.
 
 > Other methods, include: bybusyness, byrequests, heartbeat
 
 - Verify that our configuration works – try to access your LB’s public IP address or Public DNS name from your browser:
-`http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php`
- 
+  `http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php`
+
+![project8](../images/project8/11.png)
+
 > Note: If in the Project 7 you mounted `/var/log/httpd/` from your Web Servers to the `NFS server` – unmount them and make sure that each Web Server has its own log directory.
 
 - Open two ssh/Putty consoles for both Web Servers and run following command:
@@ -61,6 +80,10 @@ ProxyPassReverse / balancer://mycluster/
 `sudo tail -f /var/log/httpd/access_log`
 
 - Try to refresh your browser page `http://<Load-Balancer-Public-IP-Address-or-Public-DNS-Name>/index.php` several times and make sure that both servers receive HTTP GET requests from your LB – new records must appear in each server’s log file. The number of requests to each server will be approximately the same since we set `loadfactor` to the same value for both servers – it means that traffic will be disctributed evenly between them.
+
+![project8](../images/project8/12.png)
+
+![project8](../images/project8/13.png)
 
 > If you have configured everything correctly – your users will not even notice that their requests are served by more than one server.
 
@@ -79,22 +102,21 @@ ProxyPassReverse / balancer://mycluster/
 <WebServer1-Private-IP-Address> Web1
 <WebServer2-Private-IP-Address> Web2
 ```
+
 - Now you can update your LB config file with those names instead of IP addresses.
 
 ```config
 BalancerMember http://Web1:80 loadfactor=5 timeout=1
 BalancerMember http://Web2:80 loadfactor=5 timeout=1
 ```
- 
+
 - You can try to `curl` your Web Servers from LB locally `curl http://Web1` or `curl http://Web2` – it will work.
 
 > Remember, this is only internal configuration and it is also local to your LB server, these names will neither be ‘resolvable’ from other servers internally nor from the Internet.
 
-
 - Now your set up looks like this:
+
+![project8](../images/project8/14.png)
 
 Congratulations!
 You have just implemented a Load balancing Web Solution for your DevOps team.
-
- 
-
