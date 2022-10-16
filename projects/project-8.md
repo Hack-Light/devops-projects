@@ -114,6 +114,8 @@ BalancerMember http://Web2:80 loadfactor=5 timeout=1
 
 > Remember, this is only internal configuration and it is also local to your LB server, these names will neither be ‘resolvable’ from other servers internally nor from the Internet.
 
+- #### THIS VIDEO CONTAINS ALL COMMANDS USED TO FINISH THIS PROJECT - [Project 8 Video](https://drive.google.com/file/d/1sNyUN7UwtxJ9nCjMQrLJfjAjxSZTKdKZ/view?usp=sharing)
+
 - Now your set up looks like this:
 
 ![project8](../images/project8/14.png)
