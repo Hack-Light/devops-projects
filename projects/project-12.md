@@ -160,7 +160,7 @@ ansible-playbook -i inventory/dev.yml playbooks/site.yaml
 
 _Now you have learned how to use import_playbooks module and you have a ready solution to install/delete packages on multiple servers with just one command._
 
-### Step 3 – Configure UAT Webservers with a role `Webserver`
+### STEP 3 – CONFIGURE UAT WEBSERVERS WITH A ROLE `WEBSERVER`
 
 We have our nice and clean dev environment, so let us put it aside and configure 2 new Web Servers as uat. We could write tasks to configure Web Servers in the same playbook, but it would be too messy, instead, we will use a dedicated role to make our configuration reusable.
 
@@ -290,7 +290,7 @@ Your main.yml may consist of following tasks:
 
 ![project12](../images/project12/28.png)
 
-### Step 4 – Reference ‘Webserver’ role
+### STEP 4 – REFERENCE ‘WEBSERVER’ ROLE
 
 Within the static-assignments folder, create a new assignment for uat-webservers `uat-webservers.yml`. This is where you will reference the role.
 
@@ -314,7 +314,7 @@ So, we should have this in `site.yml`
 - import_playbook: ../static-assignments/uat-webservers.yml
 ```
 
-### Step 5 – Commit & Test
+### STEP 5 – COMMIT & TEST
 
 - Commit your changes, create a Pull Request and merge them to master branch, make sure webhook triggered two consequent Jenkins jobs, they ran successfully and copied all the files to your Jenkins-Ansible server into /home/ubuntu/ansible-config-mgt/ directory.
 
