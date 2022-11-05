@@ -1,6 +1,6 @@
-# darey.io-pbl-devops
+# DEVOPS PROJECTS
 
-> Project based devops training
+> PROJECT BASED DEVOPS TRAINING FROM [DAREY.IO](https://darey.io)
 
 ### [PROJECT 1](./Project%201/) - LAMP STACK IMPLEMENTATION
 
