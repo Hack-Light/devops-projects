@@ -936,3 +936,6 @@ To test, create different branches and push to GitHub. You will realise that onl
 
 > Notice that with the current state of the code, it cannot be deployed to Integration environments due to its quality. In the real world, DevOps engineers will push this back to developers to work on the code further, based on SonarQube quality report. Once everything is good with code quality, the pipeline will pass and proceed with sipping the codes further to a higher environment.
 
+My Video Submission
+
+https://user-images.githubusercontent.com/52836079/202650868-d8430f75-5c13-4956-b260-1314635a6c70.mov
