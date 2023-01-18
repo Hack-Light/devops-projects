@@ -111,7 +111,7 @@ EOF
 > Part of the requirements is to ensure that the volume exists in the same region and availability zone as the EC2 instance running the pod. Hence, we need to find out Which node is running the pod (replace the pod name with yours)
 
 ```bash
-kubectl get po nginx-deployment-6fdcffd8fc-thcfp -o wide
+kubectl get pod nginx-deployment-6fdcffd8fc-thcfp -o wide
 
 # Output:
 
@@ -124,6 +124,8 @@ The NODE column shows the node the pode is running on
 In which Availability Zone the node is running.
 
 `kubectl describe node ip-10-0-3-233.eu-west-2.compute.internal`
+
+![project23](./images/1.png)
 
 The information is written in the labels section of the descibe command.
 
@@ -222,8 +224,8 @@ The more elegant way to achieve this is through Persistent Volume and Persistent
 
 In kubernetes, there are many elegant ways of persisting data. Each of which is used to satisfy different use cases. Lets take a look at the different options available.
 
-Persistent Volume (PV) and Persistent Volume Claim (PVC)
-configMap
+- Persistent Volume (PV) and Persistent Volume Claim (PVC)
+- configMap
 
 ## MANAGING VOLUMES DYNAMICALLY WITH PVS AND PVCS
 
@@ -315,12 +317,16 @@ storageClassName: gp2
 ```
 
 Apply the manifest file and you will get an output like below
-persistentvolumeclaim/nginx-volume-claim created
+
+`persistentvolumeclaim/nginx-volume-claim created`
 
 Run get on the pvc and you will notice that it is in pending state.
-kubectl get pvc
+`kubectl get pvc`
+
+```
 NAME STATUS VOLUME CAPACITY ACCESS MODES STORAGECLASS AGE
 nginx-volume-claim Pending gp2 61s
+```
 
 To troubleshoot this, simply run a describe on the pvc. Then you will see in the Message section that this pvc is waiting for the first consumer to be created before binding the PV to a PV
 
@@ -350,6 +356,8 @@ If you run `kubectl get pv` you will see that no PV is created yet. The _waiting
 ```bash
 kubectl describe storageclass gp2
 ```
+
+![project23](./images/2.png)
 
 To proceed, simply apply the new deployment configuration below.
 
@@ -389,13 +397,19 @@ template:
 Notice that the volumes section nnow has a `persistentVolumeClaim`. With the new deployment manifest, the `/tmp/dare` directory will be persisted, and any data written in there will be sotred permanetly on the volume, which can be used by another Pod if the current one gets replaced.
 
 Now lets check the dynamically created PV
-kubectl get pv
+
+`kubectl get pv`
+
+```
 NAME CAPACITY ACCESS MODES RECLAIM POLICY STATUS CLAIM STORAGECLASS REASON AGE
 pvc-89ba00d9-68f4-4039-b19e-a6471aad6a1e 2Gi RWO Delete Bound default/nginx-volume-claim gp2 7s
+```
+
+![project23](./images/3.png)
 
 You can copy the PV Name and search in the AWS console. You will notice that the volum has been dynamically created there.
 
-![](https://www.darey.io/wp-content/uploads/2022/04/PV-volume.png)
+![project23](./images/4.png)
 
 ### Approach 2 (Attempt this on your own). [See an example here](https://www.elastic.co/guide/en/cloud-on-k8s/current/k8s-volume-claim-templates.html)
 
@@ -417,6 +431,8 @@ Remove the volumeMounts and PVC sections of the manifest and use kubectl to appl
 
 port forward the service and ensure that you are able to see the "Welcome to nginx" page
 
+![project23](./images/6.png)
+
 exec into the running container and keep a copy of the index.html file somewhere. For example
 
 ```bash
@@ -425,6 +441,8 @@ cat /usr/share/nginx/html/index.html
 ```
 
 Copy the output and save the file on your local pc because we will need it to create a configmap.
+
+![project23](./images/5.png)
 
 ### Persisting configuration data with configMaps
 
@@ -524,9 +542,13 @@ root@nginx-deployment-84b799b888-fqzwk:/# ls -ltr  /usr/share/nginx/html
 lrwxrwxrwx 1 root root 17 Feb 19 16:16 index.html -> ..data/index.html
 ```
 
+![project23](./images/7.png)
+
 You can now see that the `index.html` is now a soft link to ../data
 
 Accessing the site will not change anything at this time because the same html file is being loaded through configmap.
+
+![project23](./images/8.png)
 
 But if you make any change to the content of the html file through the configmap, and restart the pod, all your changes will persist.
 
@@ -588,6 +610,8 @@ index-file: |
 ```
 
 Without restarting the pod, your site should be loaded automatically.
+
+![project23](./images/9.png)
 
 If you wish to restart the deployment for any reason, simply use the command
 
