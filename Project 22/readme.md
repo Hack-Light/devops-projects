@@ -1,5 +1,7 @@
 # PROJECT 22 - DEPLOYING APPLICATIONS INTO KUBERNETES CLUSTER
 
+[Project Repository](https://github.com/Hack-Light/k8s-project-files)
+
 In this project, you will build upon your knowledge of Kubernetes architecture, and begin to deploy applications on a K8s cluster. Kubernetes has a lot of moving parts; it operates with several layers of abstraction between your application and host machines where it runs. So many terms, and capabilities that is not realistic to learn it all at once. Hence, you will be introduced to as many concepts as possible, but gradually.
 
 Within this project we are going to learn and see in action following:
