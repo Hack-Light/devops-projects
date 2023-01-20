@@ -10,14 +10,16 @@ By default, Terraform CLI performs operation on the server whene it is invoked, 
 
 Terraform Cloud executes Terraform commands on disposable virtual machines, this remote execution is also called remote operations.
 
-
 ## Migrate your .tf codes to Terraform Cloud
+
 Le us explore how we can migrate our codes to Terraform Cloud and manage our AWS infrastructure from there:
 
 - Create a Terraform Cloud account
 - Create an organization
 - Select "Start from scratch", choose a name for your organization and create it.
 - Configure a workspace
+
+![project19](./images/1.png)
 
 We will use version control workflow as the most common and recommended way to run Terraform commands triggered from our git repository.
 
@@ -47,6 +49,8 @@ Before you proceed ensure you have the following tools installed on your local m
 - packer
 - Ansible
 
+![project19](./images/2.png)
+
 Refer to this repository for guidiance on how to refactor your enviroment to meet the new changes above and ensure you go through the README.md file.
 
 Run terraform plan and terraform apply from web console
@@ -55,11 +59,23 @@ Switch to "Runs" tab and click on "Queue plan manualy" button. If planning has b
 
 Check the logs and verify that everything has run correctly. Note that Terraform Cloud has generated a unique state version that you can open and see the codes applied and the changes made since the last run.
 
+![project19](./images/3.png)
+
+![project19](./images/4.png)
+
+![project19](./images/5.png)
+
+![project19](./images/6.png)
+
+![project19](./images/7.png)
+
+![project19](./images/8.png)
+
 ## Test automated terraform plan
 
 By now, you have tried to launch plan and apply manually from Terraform Cloud web console. But since we have an integration with GitHub, the process can be triggered automatically. Try to change something in any of .tf files and look at "Runs" tab again – plan must be launched automatically, but to apply you still need to approve manually. Since provisioning of new Cloud resources might incur significant costs. Even though you can configure "Auto apply", it is always a good idea to verify your plan results before pushing it to apply to avoid any misconfigurations that can cause ‘bill shock’.
 
-Note: First, try to approach this projectoun your own, but if you hit any blocker and could not move forward with the project, refer to this video
+![project19](./images/9.png)
 
 ## Practice Task 1
 
